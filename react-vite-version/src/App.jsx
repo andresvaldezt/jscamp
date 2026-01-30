@@ -11,6 +11,15 @@ const RESULTS_PER_PAGE = 3;
 function App() {
 
   const[
+    filters,
+    setFilters
+  ] = useState({
+        technology: '',
+        location: '',
+        experiencielevel: ''
+  })
+
+  const[
     textToFilter, //Texto actual a filtrar
     setTextToFilter //cambia el texto cambian los resultados
   ] = useState('')
@@ -20,9 +29,15 @@ function App() {
     setCurrentPage //cambiando de estado o en este caso cambiando de pagina
   ] = useState(1)
 
+  const jobsFilteredByFilters = jobsData.filter(job =>{
+    return (
+      (filters.technology === '' || job.data.technology === filters.technology)
+    )
+  })
+
   const jobsWithTextFilter = textToFilter === ''
-    ? jobsData
-    : jobsData.filter(job => {
+    ? jobsFilteredByFilters
+    : jobsFilteredByFilters.filter(job => {
         return job.titulo.toLocaleLowerCase().includes(textToFilter.toLocaleLowerCase())
     })
 
@@ -41,12 +56,13 @@ function App() {
     setCurrentPage(page);
   }
 
-  const handleSearch = () =>{
-
-  }
-
   const handleTextFilter = (newTextToFilter) =>{
     setTextToFilter(newTextToFilter)
+    setCurrentPage(1)
+  }
+
+  const handleSearch = (filters) =>{
+    setFilters(filters)
     setCurrentPage(1)
   }
   

@@ -3,7 +3,10 @@ export function SearchFilters({idTechnology, idLocation, idExperienceLevel}){
     return(
         <div className="search-filters">
             <select name={idTechnology} id="tech">
-                <option value="1">Tecnología</option>
+                <option value="">Tecnología</option>
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="mobile">Mobile</option>
             </select>
             <select name={idLocation} id="filter-location">
                 <option value="none">Ubicación</option>
@@ -16,7 +19,7 @@ export function SearchFilters({idTechnology, idLocation, idExperienceLevel}){
                 <option value="3">Tipo de Contrato</option>
             </select>*/}
             <select name={idExperienceLevel} id="level">
-                <option value="4">Nivel de Experiencia</option>
+                <option value="">Nivel de Experiencia</option>
             </select>
         </div>
     )
