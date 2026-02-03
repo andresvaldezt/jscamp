@@ -13,7 +13,9 @@ export function JobSearchForm({onSearch, onTextFilter}){
       e.preventDefault()
       console.log('Submit del formulario de busqueda')
 
-      const formData = new FormData(e.target);
+      //Se cambio e.target por e.currentTarget
+      //asi recuperamos todo el formulario para filtrar
+      const formData = new FormData(e.currentTarget);
 
       const filters = {
         search: formData.get(idText),
@@ -32,7 +34,7 @@ export function JobSearchForm({onSearch, onTextFilter}){
     }
 
     return(
-        <form onSubmit={handleSubmit} className="jobs-search" role="search">
+        <form onChange={handleSubmit} className="jobs-search" role="search">
             <SearchBar
                 idText={idText}
                 onTextChange={handleTextChange}

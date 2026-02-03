@@ -23,12 +23,12 @@ export function SearchBar({idText, onTextChange}){
                 placeholder="Buscar empleos por titulo, habilidad o empresa"
                 onChange={onTextChange}
             />
-            <button 
+            {/*<button 
                 className="search-button" 
                 type="submit"
             >
                 Buscar
-            </button>
+            </button>*/}
         </div>
     )
 }
