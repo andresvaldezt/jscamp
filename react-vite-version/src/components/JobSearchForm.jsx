@@ -1,13 +1,13 @@
-import { useId } from 'react'
-import {SearchBar} from './SearchBar.jsx'
-import {SearchFilters} from './SearchFilters.jsx'
+import { useId, useState } from 'react'
+import { SearchBar } from './SearchBar.jsx'
+import { SearchFilters } from './SearchFilters.jsx'
 
-export function JobSearchForm({onSearch, onTextFilter}){
+const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter  }) => {
 
-    const idText = useId()
-    const idTechnology = useId()
-    const idLocation = useId()
-    const idExperienceLevel = useId()
+    const[
+        searchText,
+        setSearchText
+    ] = useState("");
 
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -29,9 +29,31 @@ export function JobSearchForm({onSearch, onTextFilter}){
 
     const handleTextChange = (e) => {
         const text = e.target.value
-        console.log(text)
+        setSearchText(text)
         onTextFilter(text);
     }
+
+    return {
+        searchText,
+        handleSubmit,
+        handleTextChange
+    }
+
+}
+
+export function JobSearchForm({onSearch, onTextFilter}){
+
+    const idText = useId()
+    const idTechnology = useId()
+    const idLocation = useId()
+    const idExperienceLevel = useId()
+
+    //los hooks no pueden ser llamados dentro de un callback, estos deben ser llamados dentro de la funcion
+    //del componente o dentro de otra funcion custom hook
+    const {
+        handleSubmit,
+        handleTextChange
+    } = useSearchForm({ idText, idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter})
 
     return(
         <form onChange={handleSubmit} className="jobs-search" role="search">
