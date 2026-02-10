@@ -8,6 +8,13 @@ export function SearchResults({jobs}){
                 No se encontraron coincidencias...
             </p>
             <div className="job-listing">
+                {
+                    jobs.length === 0 && (
+                        <p style={{textAling: 'center', padding: '1rem', textWrap: 'balance'}}>
+                            No se han encontrado empleos que coinciden los criterios de búsqueda
+                        </p>
+                    )
+                }
                 {jobs.map(job => (
                     <JobCard
                         key = {job.id}

@@ -9,11 +9,13 @@ export function SearchFilters({idTechnology, idLocation, idExperienceLevel}){
                 <option value="mobile">Mobile</option>
             </select>
             <select name={idLocation} id="filter-location">
-                <option value="none">Ubicación</option>
+                <option value="">Ubicación</option>
                 <option value="remoto">Remoto</option>
                 <option value="cdmx">CDMX</option>
                 <option value="guadalajara">GDL</option>
-                <option value="MTY">MTY</option>
+                <option value="barcelona">Barcelona</option>
+                <option value="madrid">Madrid</option>
+                <option value="bsas">Buenos Aires</option>
             </select>
             {/*<select name="contract" id="contract">
                 <option value="3">Tipo de Contrato</option>
