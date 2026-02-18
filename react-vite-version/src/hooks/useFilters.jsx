@@ -1,44 +1,34 @@
 import { useEffect, useState } from 'react'
 
 const RESULTS_PER_PAGE = 4;
+const initialFilters = {
+    search: '',
+    technology: '',
+    location: '',
+    experiencielevel: ''
+}
 
 export function useFilters(){
 
-    const[
-        filters,
-        setFilters
-    ] = useState({
-            technology: '',
-            location: '',
-            experiencielevel: ''
-    })
+    //Los estados se componen de 3 elementos:
+    //estado actual, un metodo para actualizar el estado
+    //y un estado inicial.
 
-    const[
-        textToFilter, //Texto actual a filtrar
-        setTextToFilter //cambia el texto cambian los resultados
-    ] = useState('')
+    const [filters, setFilters] = useState(initialFilters)
+    const [textToFilter, setTextToFilter ] = useState('')
+    const [currentPage, setCurrentPage ] = useState(1)
+    const [jobs, setJobs] = useState([])
+    const [total, setTotal] = useState(0)
+    const [loading, setLoading] = useState(true)
 
-    const[
-        currentPage, //estado actual o en este caso pagina actual
-        setCurrentPage //cambiando de estado o en este caso cambiando de pagina
-    ] = useState(1)
-
-    const [
-        jobs, 
-        setJobs
-    ] = useState([])
-
-    const [
-        total,
-        setTotal
-    ] = useState(0)
-
-    const [
-        loading,
-        setLoading
-    ] = useState(true)
-
+    const isFiltered = Object.values(filters).some(v => 
+        v !== null && v !== undefined && v.toString().trim() !== ''
+    );
+    console.log("Filtros actuales:", filters);
+    console.log("¿Está filtrado?:", isFiltered);
+    
     useEffect(() => {
+        //console.log(isFiltered)
         async function fetchJobs() {
             try {
                 setLoading(true)
@@ -70,27 +60,7 @@ export function useFilters(){
         fetchJobs()
     }, [filters, textToFilter, currentPage])
 
-    // const jobsFilteredByFilters = jobs.filter(job =>{
-    //     return (
-    //     (filters.technology === '' || job.data.technology === filters.technology)
-    //     )
-    // })
-
-    // const jobsWithTextFilter = textToFilter === ''
-    //     ? jobsFilteredByFilters
-    //     : jobsFilteredByFilters.filter(job => {
-    //         return job.titulo.toLocaleLowerCase().includes(textToFilter.toLocaleLowerCase())
-    //     })
-
     const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
-
-    // //pasamos el filtro aqui, si no hay texto en el filtro renderiza todos
-    // const pagedResults = jobsWithTextFilter.slice(
-    //     //donde comienza a cortar
-    //     (currentPage - 1) * RESULTS_PER_PAGE, //pagina 1 -> 0, 2 -> 4, 3 -> 8
-    //     //hasta donde va a cortar
-    //     currentPage * RESULTS_PER_PAGE        //pagina 1 -> 4, 2 -> 8, 3 -> 12
-    // )
 
     const handlePageChange = (page) => {
         console.log('cambiando a la pagina:', page);
@@ -107,14 +77,23 @@ export function useFilters(){
         setCurrentPage(1)
     }
 
+    const handleClearFilters = () =>{
+        setFilters(initialFilters)
+        setTextToFilter('')
+    }
+
     return {
         jobs,
         total,
+        filters,
         loading,
         totalPages,
         currentPage,
         handlePageChange,
         handleSearch,
-        handleTextFilter
+        handleTextFilter,
+        isFiltered,
+        handleClearFilters,
+        setFilters
     }
 }
