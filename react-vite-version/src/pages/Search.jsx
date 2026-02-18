@@ -14,15 +14,22 @@ export function SearchPage() {
     currentPage,
     handlePageChange,
     handleSearch,
-    handleTextFilter
+    handleTextFilter,
+    isFiltered,
+    handleClearFilters,
+    filters,
+    setFilters
   } = useFilters()
   
-  useEffect(() => {
-    document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`
-  }, [total, currentPage])
+  // useEffect(() => {
+  //   document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`
+  // }, [total, currentPage])
+
+  const title = document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`;
 
   return (
     <main className="find-job">
+      <title>{title}</title>
 
         <section className="jobs-header">
 
@@ -33,6 +40,10 @@ export function SearchPage() {
             <JobSearchForm
               onSearch={handleSearch}
               onTextFilter={handleTextFilter}
+              isFiltered={isFiltered}
+              handleClearFilters={handleClearFilters}
+              filters={filters}
+              setFilters={setFilters}
             />
         </section>
 

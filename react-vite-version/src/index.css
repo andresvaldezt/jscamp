@@ -583,6 +583,39 @@ footer {
 }
 
 
+.quit-filters{
+  padding: 0rem 1.5rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background-color: rgb(247, 80, 80);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s;
+  font-family: inherit;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  animation: 'fadeIn 0.3s';
 
+  &:hover, /* pseudo-clase que significa que el ratón está encima */
+  &:focus { /* pseudo-clase que significa que el elemento tiene el foco */
+    background-color: rgb(247, 80, 80);
+    /* outline: 1px solid white; */
+    box-shadow: 0px 0px 5px 2px #ffffffa2 ;
+    outline-offset: 0px;
+  }
 
+  &:active { 
+    transform: scale(0.90)
+  }
 
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  &.is-applied{
+    background-color: rgb(79, 187, 79);
+  }
+}

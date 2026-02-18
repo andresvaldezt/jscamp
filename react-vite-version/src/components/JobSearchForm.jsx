@@ -11,7 +11,6 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, on
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      console.log('Submit del formulario de busqueda')
 
       //Se cambio e.target por e.currentTarget
       //asi recuperamos todo el formulario para filtrar
@@ -23,7 +22,6 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, on
         location: formData.get(idLocation),
         experiencielevel: formData.get(idExperienceLevel)
       }
-      console.log(filters)
       onSearch(filters)
     }
 
@@ -41,7 +39,7 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, on
 
 }
 
-export function JobSearchForm({onSearch, onTextFilter}){
+export function JobSearchForm({onSearch, onTextFilter, isFiltered, handleClearFilters, filters, setFilters}){
 
     const idText = useId()
     const idTechnology = useId()
@@ -50,21 +48,33 @@ export function JobSearchForm({onSearch, onTextFilter}){
 
     //los hooks no pueden ser llamados dentro de un callback, estos deben ser llamados dentro de la funcion
     //del componente o dentro de otra funcion custom hook
-    const {
-        handleSubmit,
-        handleTextChange
-    } = useSearchForm({ idText, idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter})
+    const {handleSubmit, handleTextChange} = useSearchForm(
+        { 
+            idText, 
+            idTechnology, 
+            idLocation, 
+            idExperienceLevel, 
+            onSearch, 
+            onTextFilter
+        }
+    )
 
     return(
         <form onChange={handleSubmit} className="jobs-search" role="search">
             <SearchBar
                 idText={idText}
                 onTextChange={handleTextChange}
+                filters={filters}
+                setFilters={setFilters}
             />
             <SearchFilters
                 idTechnology={idTechnology}
                 idLocation={idLocation}
                 idExperienceLevel={idExperienceLevel}
+                isFiltered={isFiltered}
+                handleClearFilters={handleClearFilters}
+                filters={filters}
+                setFilters={setFilters}
             />
         </form>
     )

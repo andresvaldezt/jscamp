@@ -1,4 +1,4 @@
-export function SearchBar({idText, onTextChange}){
+export function SearchBar({idText, onTextChange, filters}){
 
     return(
         <div className="search-bar">
@@ -21,6 +21,7 @@ export function SearchBar({idText, onTextChange}){
                 name={idText} 
                 type="text" 
                 placeholder="Buscar empleos por titulo, habilidad o empresa"
+                value={filters.search}
                 onChange={onTextChange}
             />
             {/*<button 
