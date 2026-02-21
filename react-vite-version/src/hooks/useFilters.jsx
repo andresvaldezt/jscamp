@@ -80,6 +80,7 @@ export function useFilters(){
     const handleClearFilters = () =>{
         setFilters(initialFilters)
         setTextToFilter('')
+        setCurrentPage(1)
     }
 
     return {
