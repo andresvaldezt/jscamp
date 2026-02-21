@@ -1,4 +1,3 @@
-import { useEffect} from 'react'
 import { JobSearchForm } from '../components/JobSearchForm.jsx'
 import { SearchResults } from '../components/SearchResults.jsx'
 import { Pagination } from '../components/Pagination.jsx'
@@ -20,10 +19,6 @@ export function SearchPage() {
     filters,
     setFilters
   } = useFilters()
-  
-  // useEffect(() => {
-  //   document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`
-  // }, [total, currentPage])
 
   const title = document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`;
 
