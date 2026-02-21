@@ -21,15 +21,9 @@ export function SearchBar({idText, onTextChange, filters}){
                 name={idText} 
                 type="text" 
                 placeholder="Buscar empleos por titulo, habilidad o empresa"
-                value={filters.search}
+                /*value={filters.search}*/
                 onChange={onTextChange}
             />
-            {/*<button 
-                className="search-button" 
-                type="submit"
-            >
-                Buscar
-            </button>*/}
         </div>
     )
 }

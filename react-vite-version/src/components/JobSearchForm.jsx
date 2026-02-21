@@ -2,6 +2,8 @@ import { useId, useState } from 'react'
 import { SearchBar } from './SearchBar.jsx'
 import { SearchFilters } from './SearchFilters.jsx'
 
+let timeoutId = null
+
 const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter  }) => {
 
     const[
@@ -14,7 +16,11 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, on
 
       //Se cambio e.target por e.currentTarget
       //asi recuperamos todo el formulario para filtrar
-      const formData = new FormData(e.currentTarget);
+      const formData = new FormData(e.currentTarget)
+
+      if(e.target.name === idText){
+        return
+      }
 
       const filters = {
         search: formData.get(idText),
@@ -22,13 +28,22 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, on
         location: formData.get(idLocation),
         experiencielevel: formData.get(idExperienceLevel)
       }
+
       onSearch(filters)
     }
 
     const handleTextChange = (e) => {
         const text = e.target.value
-        setSearchText(text)
-        onTextFilter(text);
+        setSearchText(text)//actualiza el imput inmediatamente
+
+        //DEBOUNCE: Cancelar el timeout anterior
+        if(timeoutId){
+            clearTimeout(timeoutId)
+        }
+        
+        timeoutId = setTimeout( () => {
+            onTextFilter(text)
+        }, 500)  
     }
 
     return {
@@ -65,7 +80,6 @@ export function JobSearchForm({onSearch, onTextFilter, isFiltered, handleClearFi
                 idText={idText}
                 onTextChange={handleTextChange}
                 filters={filters}
-                setFilters={setFilters}
             />
             <SearchFilters
                 idTechnology={idTechnology}

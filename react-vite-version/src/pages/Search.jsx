@@ -47,6 +47,11 @@ export function SearchPage() {
             />
         </section>
 
+        <Pagination 
+          currentPage={currentPage} 
+          totalPages={totalPages} 
+          onPageChange={handlePageChange}
+        />
         <SearchResults 
           jobs={jobs}
         />
