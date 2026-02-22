@@ -17,7 +17,8 @@ export function SearchPage() {
     isFiltered,
     handleClearFilters,
     filters,
-    setFilters
+    setFilters,
+    textToFilter
   } = useFilters()
 
   const title = document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`;
@@ -39,6 +40,7 @@ export function SearchPage() {
               handleClearFilters={handleClearFilters}
               filters={filters}
               setFilters={setFilters}
+              textToFilter={textToFilter}
             />
         </section>
 

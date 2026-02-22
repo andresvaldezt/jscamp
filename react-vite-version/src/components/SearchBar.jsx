@@ -1,4 +1,4 @@
-export function SearchBar({idText, onTextChange, filters, inputRef, handleClearInput}){
+export function SearchBar({idText, onTextChange, filters, inputRef, handleClearInput, textToFilter}){
 
     return(
         <div className="search-bar">
@@ -24,6 +24,7 @@ export function SearchBar({idText, onTextChange, filters, inputRef, handleClearI
                 placeholder="Buscar empleos por titulo, habilidad o empresa"
                 /*value={filters.search}*/
                 onChange={onTextChange}
+                defaultValue={textToFilter}
             />
             <button 
                 className={`quit-filters`}

@@ -54,7 +54,7 @@ const useSearchForm = ({ idText, idTechnology, idLocation, idExperienceLevel, on
 
 }
 
-export function JobSearchForm({onSearch, onTextFilter, isFiltered, handleClearFilters, filters, setFilters}){
+export function JobSearchForm({onSearch, onTextFilter, isFiltered, handleClearFilters, filters, setFilters, textToFilter}){
 
     const idText = useId()
     const idTechnology = useId()
@@ -93,6 +93,7 @@ export function JobSearchForm({onSearch, onTextFilter, isFiltered, handleClearFi
                 filters={filters}
                 inputRef={inputRef}
                 handleClearInput={handleClearInput}
+                textToFilter={textToFilter}
             />
             <SearchFilters
                 idTechnology={idTechnology}
